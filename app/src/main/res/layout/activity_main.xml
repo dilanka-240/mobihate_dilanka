@@ -1,13 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <androidx.appcompat.widget.SwitchCompat
-        android:id="@+id/grayscaleSwitch"
-        android:text="@string/enable_grayscale"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="32dp"
+    android:background="#1a1a2e">
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:minHeight="48dp"
-        android:minWidth="48dp" />
+        android:text="Bedtime mod"
+        android:textColor="#ffffff"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="32dp"/>
+
+    <TextView
+        android:id="@+id/label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Intensity: 70%"
+        android:textColor="#cccccc"
+        android:textSize="16sp"
+        android:layout_marginBottom="8dp"/>
+
+    <SeekBar
+        android:id="@+id/intensityBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="95"
+        android:progress="70"
+        android:layout_marginBottom="32dp"/>
+
+    <Button android:id = "@+id/btnToggle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enable Bedtime Mode"
+        android:textSize="16sp"
+        android:paddingVertical="16dp"
+        android:paddingHorizontal="32dp"
+        android:backgroundTint="#e94560"
+        android:textColor="#ffffff"/>
+
 </LinearLayout>
