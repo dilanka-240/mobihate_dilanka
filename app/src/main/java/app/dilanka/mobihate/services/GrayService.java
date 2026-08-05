@@ -1,5 +1,6 @@
 package app.dilanka.mobihate.services;
 
+import android.accessibilityservice.AccessibilityService;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -13,12 +14,13 @@ import android.os.Build;
 import android.os.IBinder;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.accessibility.AccessibilityEvent;
 
 import androidx.core.app.NotificationCompat;
 
 import app.dilanka.mobihate.MainActivity;
 
-public class GrayService extends Service {
+public class GrayService extends AccessibilityService {
 
     private static boolean running = false;
     private static WindowManager windowManager;
@@ -37,8 +39,8 @@ public class GrayService extends Service {
     }
 
     @Override
-    public void onCreate() {
-        super.onCreate();
+    public void onServiceConnected() {
+        super.onServiceConnected();
         windowManager = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
     }
 
@@ -94,6 +96,11 @@ public class GrayService extends Service {
                 .setOngoing(true)
                 .build();
     }
+    @Override
+    public void onAccessibilityEvent(AccessibilityEvent event){}
+
+    @Override
+    public void onInterrupt(){}
 
     @Override
     public void onDestroy() {
@@ -105,8 +112,4 @@ public class GrayService extends Service {
         super.onDestroy();
     }
 
-    @Override
-    public IBinder onBind(Intent intent) {
-        return null;
-    }
 }

@@ -1,5 +1,6 @@
 package app.dilanka.mobihate;
 
+import android.content.ComponentName;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -22,9 +23,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Button toggleBtn = findViewById(R.id.btnToggle);
+        Button bedTimeBtn = findViewById(R.id.btnOpenBedTime);
         SeekBar intensityBar = findViewById(R.id.intensityBar);
         TextView label = findViewById(R.id.label);
 
+        // open gray filter
         toggleBtn.setOnClickListener(v -> {
             if (!Settings.canDrawOverlays(this)) {
                 Intent intent = new Intent(
@@ -43,6 +46,26 @@ public class MainActivity extends AppCompatActivity {
                 toggleBtn.setText("Disable Grayscale");
             }
         });
+
+        // sending to bedtime on/off settings
+        bedTimeBtn.setOnClickListener(v -> {
+            Intent intent = new Intent();
+            intent.setComponent(new ComponentName(
+                    "com.google.android.apps.wellbeing",
+                    "com.google.android.apps.wellbeing.settings.ui.bedtime.BedTimeActivity"
+            ));
+            try{
+                startActivity(intent);
+            }catch(Exception e){
+                Intent wellBeingIntent = getPackageManager().getLaunchIntentForPackage("com.google.android.apps.wellbeing");
+                if(wellBeingIntent != null){
+                    startActivity(wellBeingIntent);
+                }else{
+                    startActivity(new Intent(Settings.ACTION_SETTINGS));
+                }
+            }
+        });
+
         intensityBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged (SeekBar seekBar,int progress, boolean fromUser){
